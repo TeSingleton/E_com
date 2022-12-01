@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
-
+// todo add routes git add
 // The `/api/categories` endpoint
 
 router.get('/', (req, res) => {
