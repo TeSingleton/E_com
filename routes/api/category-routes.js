@@ -1,11 +1,15 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
-// todo add routes git add
+// todo add routes 
 // The `/api/categories` endpoint
 
 router.get('/', (req, res) => {
-  // find all categories
-  // be sure to include its associated Products
+  Category.findAll({
+    // include its associated Products
+    include: [Product]
+  })
+  .then(categories => res.json(categories))
+  .catch(err => res.status(500).json(err));
 });
 
 router.get('/:id', (req, res) => {
