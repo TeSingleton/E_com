@@ -26,7 +26,7 @@ router.get("/:id", (req, res) => {
   .catch(err => res.status(500).json(err));
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   // create a new category
   Category.create(req.body)
   .then(addNewCategory=> res.json(addNewCategory)).catch(err=> res.status(400).json(err));
@@ -34,10 +34,28 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
   // update a category by its `id` value
+  Category.update(req.body,{
+    where:{
+      id:req.params.id
+    }
+   
+  })
+  .then(newCategory=>{
+    if(!newCatergory){
+      res.status(400)
+      .json({message:"Nothing found with that ID"})
+    }
+    res.json(newCategory);
+  })
+  .catch(err=>res.status(500).json(err));
 });
 
 router.delete("/:id", (req, res) => {
-  // delete a category by its `id` value
+Category.destroy({where:{id:req.params.id}})
+.then(category =>{if(!category){
+  res.status(400).json({message:"Nothing found with that ID"})
+}res.json(category);})
+.catch(err=>res.status(500).json(err));
 });
 
 module.exports = router;
