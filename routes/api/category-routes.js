@@ -13,6 +13,8 @@ router.get("/", (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
+//* "Dont Quit. You're Already in pain. You're already hurt. Get rewarded from it"*//
+
 router.get("/:id", (req, res) => {
   // find one category by its `id` value
   Catergory.findOne({ where: { id: req.params.id }, include: [Product] })  .then(category => {
