@@ -24,14 +24,15 @@ router.get("/:id", (req, res) => {
   Tag.findOne({
     where: { id: req.params.id },
     include: [{ model: Product, through: ProductTag }],
-  }).then((tag) => {
-    if (!tag) {
-      res.status(400).json({ message: "No tag found with ID" });
-      return;
-    }
-    res.json(tag);
   })
-  .catch(err=>res.status(500).json(err));
+    .then((tag) => {
+      if (!tag) {
+        res.status(400).json({ message: "No tag found with ID" });
+        return;
+      }
+      res.json(tag);
+    })
+    .catch((err) => res.status(500).json(err));
 });
 
 router.post("/", (req, res) => {
@@ -45,12 +46,15 @@ router.put("/:id", (req, res) => {
   // update a tag's name by its `id` value
   Tag.update(req.body, {
     where: { id: req.params.id },
-  }).then((updatedTag) => {
-    if (!updatedTag) {
-      res.status(400).json({ message: "No tag found with ID" });
-      return;
-    }
-  });
+  })
+    .then((updatedTag) => {
+      if (!updatedTag) {
+        res.status(400).json({ message: "No tag found with ID" });
+        return;
+      }
+      res.json(updatedTag);
+    })
+    .catch((err) => res.status(500).json(err));
 });
 
 router.delete("/:id", (req, res) => {
@@ -64,6 +68,7 @@ router.delete("/:id", (req, res) => {
       if (!tag) {
         res.status(404).json({ message: " No tag found with ID " });
       }
+      res.json(tag)
     })
     .catch((err) => res.status(500).json(err));
 });
