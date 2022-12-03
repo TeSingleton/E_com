@@ -29,7 +29,9 @@ router.get("/:id", (req, res) => {
       res.status(400).json({ message: "No tag found with ID" });
       return;
     }
-  });
+    res.json(tag);
+  })
+  .catch(err=>res.status(500).json(err));
 });
 
 router.post("/", (req, res) => {
