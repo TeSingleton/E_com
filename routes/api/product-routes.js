@@ -24,7 +24,9 @@ router.get("/", (req, res) => {
     ],
   })
     .then((products) => res.json(products))
-    .catch((err) => res.status(500).json(err));
+    .catch((err) => {
+      return res.status(500).json(err);
+    });
 });
 
 //* Broken Crayons Still Color*//
