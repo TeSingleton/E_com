@@ -13,7 +13,7 @@ Category.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    catergory_name: {
+    category_name: {
       type: DataTypes.STRING,
       primaryKey: true,
       autoIncrement: false,
